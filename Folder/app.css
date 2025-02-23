@@ -1,0 +1,195 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    height: 100vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-family: 'Dancing Script', cursive;
+    background: url('https://wallpaperaccess.com/full/1576189.jpg') no-repeat center center/cover;
+    overflow: hidden;
+    position: relative;
+}
+
+/* Book Container */
+.book-container {
+    position: relative;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+/* Book */
+.book {
+    position: relative;
+    width:604px;
+    height:790px;
+    transition: transform 0.5s;
+    z-index: 1;
+}
+
+.paper {
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    top: 0;
+    left: 0;
+    perspective: 1500px;
+
+}
+
+.front,
+.back {
+    background-color: white;
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    top: 0;
+    left: 0;
+    transform-origin: left;
+    transition: transform 0.5s;
+}
+
+.front {
+    z-index: 1;
+    backface-visibility: hidden;
+    border-left: 3px solid powderblue;
+}
+
+.back {
+    z-index: 0;
+}
+
+.front-content,
+.back-content {
+    width: 100%;
+    height: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.back-content {
+    transform: rotateY(180deg)
+}
+
+/* Paper flip effect */
+.flipped .front,
+.flipped .back {
+    transform: rotateY(-180deg);
+}
+
+/* Controller Buttons */
+button {
+    border: none;
+    background-color: transparent;
+    cursor: pointer;
+    margin: 10px 150px;
+    transition: transform 0.5s;
+    z-index: 2;
+}
+
+button:focus {
+    outline: none;
+}
+
+button:hover i {
+    color: #f10697;
+}
+
+i {
+    font-size: 50px;
+    color: #f10697;
+}
+
+/* Paper stack order */
+#p1 {
+    z-index: 3;
+}
+
+#p2 {
+    z-index: 2;
+}
+
+#p3 {
+    z-index: 1;
+}
+
+/* CSS for Romantic Weather */
+
+/* Glassy Background Effect */
+.glass {
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    backdrop-filter: blur(7px) brightness(0.6);
+    background: rgba(255, 0, 0, 0.151);
+    z-index: -2;
+}
+
+/* Rain Animation */
+@keyframes rain-fall {
+    from { transform: translateY(-10vh); opacity: 1; }
+    to { transform: translateY(100vh); opacity: 0; }
+}
+
+
+.raindrop {
+    position: absolute;
+    top: -10px;
+    width: 2px;
+    height: 15px;
+    background: rgba(255, 255, 255, 0.5);
+    animation: rain-fall 2s linear infinite;
+    z-index: -1;
+}
+
+/* Fog Effect */
+.fog {
+    position: absolute;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    background: radial-gradient(circle, rgba(255, 255, 255, 0.6), transparent);
+    animation: fog-move 10s ease-in-out infinite alternate;
+    z-index: -2;
+}
+
+@keyframes fog-move {
+    from { transform: translateX(-10px); }
+    to { transform: translateX(10px); }
+}
+
+
+.unmute-btn {
+    display: none;
+    position: fixed;
+    top: 90%;
+    left: 40%;
+    transform: translate(-50%, -50%);
+    padding: 15px 30px;
+    font-size: 18px;
+    font-weight: bold;
+    color: white;
+    background: linear-gradient(45deg, #ff416c, #ff4b2b);
+    border: none;
+    border-radius: 10px;
+    box-shadow: 0px 5px 15px rgba(0, 0, 0, 0.3);
+    cursor: pointer;
+    transition: all 0.3s ease-in-out;
+}
+
+/* Hover effect */
+.unmute-btn:hover {
+    background: linear-gradient(45deg, #ff4b2b, #ff416c);
+    transform: translate(-50%, -50%) scale(1.1);
+}
+
+/* Click effect */
+.unmute-btn:active {
+    transform: translate(-50%, -50%) scale(0.95);
+}
