@@ -63,7 +63,7 @@ body {
 
 .front,
 .back {
-    background-color: white;
+    background: linear-gradient(to right, #ff9a9e, #fad0c4);
     position: absolute;
     width: 100%;
     height: 100%;
@@ -270,8 +270,8 @@ i {
 }
 
 .letter {
-    background: #fff;
-    color: #333;
+    background: linear-gradient(to bottom right, #5a4500, #5a4500);
+    color: #ffffff;
     padding: 30px;
     max-width: 500px;
     border-radius: 15px;
@@ -300,3 +300,26 @@ i {
     margin-top: 20px;
 }
 
+#poem-container {
+    font-size: 20px;
+    font-family: 'Garamond';
+    color: rgb(255, 255, 255);
+    text-align: center;
+    padding: 20px;
+    max-width: 90%;
+    margin: auto;
+    opacity: 100;
+    transition: opacity 1s ease-in-out;
+    font-weight: bold;
+    margin-top: 80px;
+    text-align: left;
+}
+
+.paper.flipped #poem-container {
+    display: block; /* Ensure it stays visible */
+}
+
+#poem-container p {
+    margin: 5px 0; /* Small gaps for a sonnet feel */
+    line-height: 1.6;
+}

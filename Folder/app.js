@@ -166,3 +166,76 @@ function startMusicOnInteraction() {
 document.addEventListener("mousemove", startMusicOnInteraction);
 document.addEventListener("click", startMusicOnInteraction);
 document.addEventListener("scroll", startMusicOnInteraction);
+
+
+document.addEventListener("DOMContentLoaded", function () {
+    const poemTitle = "For the Light of My Life";
+    const poemLines = [
+        "",
+        "If you raise a storm, wild and high,",
+        "I'll be the calm that soothes the sky.",
+        "If you have a hundred tears to shed,",
+        "I'll bring a thousand smiles instead.",
+        "",
+        "If your fire burns too strong, too bright,",
+        "I'll hold you close and make it right.",
+        "If sadness tries to pull you down,",
+        "I'll lift you up—won't let you drown.",
+        "",
+        "If you find a thousand reasons to say no,",
+        "I’ll love you more than you'll ever know.",
+        "",
+        "Happy 20th birthday, my love,",
+        "You are my heart, my shining dove.",
+        "Through every joy and every test,",
+        "With you, my love, I have the best.",
+        "",
+    ];
+
+    const poemContainer = document.getElementById("poem-container");
+    const titleContainer = document.createElement("div");
+    titleContainer.style.fontWeight = "bold";
+    titleContainer.style.textAlign = "center";
+    titleContainer.style.marginBottom = "20px";
+    poemContainer.appendChild(titleContainer);
+
+    let charIndex = 0;
+    let lineIndex = -1; // Start with title
+    let isTyping = false;
+
+    function typeTitle() {
+        if (charIndex < poemTitle.length) {
+            titleContainer.innerHTML += poemTitle[charIndex];
+            charIndex++;
+            setTimeout(typeTitle, 100);
+        } else {
+            titleContainer.innerHTML += "<br><br>"; // Underline after title
+            charIndex = 0;
+            lineIndex = 0; // Move to poem
+            setTimeout(typePoem, 500);
+        }
+    }
+
+    function typePoem() {
+        if (lineIndex < poemLines.length) {
+            if (charIndex < poemLines[lineIndex].length) {
+                poemContainer.innerHTML += poemLines[lineIndex][charIndex];
+                charIndex++;
+                setTimeout(typePoem, 100);
+            } else {
+                poemContainer.innerHTML += "<br>";
+                charIndex = 0;
+                lineIndex++;
+                setTimeout(typePoem, 500);
+            }
+        }
+    }
+
+    document.getElementById("p1").addEventListener("transitionend", function () {
+        if (!isTyping && this.classList.contains("flipped")) {
+            isTyping = true;
+            poemContainer.style.display = "block";
+            setTimeout(typeTitle, 500);
+        }
+    });
+});
