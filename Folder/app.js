@@ -239,3 +239,62 @@ document.addEventListener("DOMContentLoaded", function () {
         }
     });
 });
+
+document.getElementById("p1").addEventListener("transitionend", function () {
+    // Check if p2 has been flipped, then trigger the heart rainfall inside #b2
+    if (this.classList.contains("flipped")) {
+        const heartRainfall = document.querySelector(".heart-rainfall");
+        heartRainfall.style.display = "block";  // Make heart rainfall visible
+        startHeartRainfall();  // Start the heart falling animation
+    }
+});
+
+// Function to add glitter effect alongside hearts
+function startHeartRainfall() {
+    const heartRainfall = document.querySelector(".heart-rainfall");
+    const b2 = document.getElementById("b1");  // Target the back of page 2 (container for hearts)
+
+    // Create heart elements falling from random positions inside #b2
+    setInterval(() => {
+        const heart = document.createElement("div");
+        heart.classList.add("heart");
+        heart.textContent = "❤️";  // Heart symbol
+
+        // Get the width and height of #b2 to keep hearts inside this container
+        const pageWidth = b1.offsetWidth;
+        const pageHeight = b1.offsetHeight;
+
+        // Randomize the horizontal position based on the width of #b2
+        heart.style.left = Math.random() * (pageWidth - 50) + "px";  // Random horizontal position
+        heart.style.top = Math.random() * (pageHeight - 50) + "px";  // Random vertical position inside #b2
+
+        heartRainfall.appendChild(heart);
+
+        // Remove heart after animation completes (duration should match the animation time)
+        setTimeout(() => {
+            heart.remove();
+        }, 2000);  // Duration of heart falling animation
+
+        // Add glitter effect every few seconds
+        addGlitterEffect(b1);
+    }, 300);  // Adjust how often the hearts fall
+}
+
+// Function to create glitter effect around hearts
+function addGlitterEffect(container) {
+    const glitter = document.createElement("div");
+    glitter.classList.add("glitter");
+
+    // Randomize the position of the glitter inside the container
+    const pageWidth = container.offsetWidth;
+    const pageHeight = container.offsetHeight;
+    glitter.style.left = Math.random() * (pageWidth - 5) + "px";
+    glitter.style.top = Math.random() * (pageHeight - 5) + "px";
+
+    container.appendChild(glitter);
+
+    // Remove glitter after a short period
+    setTimeout(() => {
+        glitter.remove();
+    }, 1000);
+}
