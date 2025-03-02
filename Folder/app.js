@@ -298,3 +298,70 @@ function addGlitterEffect(container) {
         glitter.remove();
     }, 1000);
 }
+
+document.addEventListener("DOMContentLoaded", function () {
+    const img = document.getElementById("loveimage");
+    const canvas = document.createElement("canvas");
+    const ctx = canvas.getContext("2d");
+
+    img.style.visibility = "hidden"; // Hide the image initially
+    img.parentNode.insertBefore(canvas, img);
+
+    canvas.width = img.width;
+    canvas.height = img.height;
+    canvas.style.position = "absolute";
+    canvas.style.top = img.offsetTop + "px";
+    canvas.style.left = img.offsetLeft + "px";
+
+    // Create a gradient overlay with Violet and Yellow
+    let gradient = ctx.createLinearGradient(0, 0, canvas.width, canvas.height);
+    gradient.addColorStop(0, "#8A2BE2"); // Violet
+    gradient.addColorStop(1, "#FFFF00"); // Yellow
+    ctx.fillStyle = gradient;
+    ctx.fillRect(0, 0, canvas.width, canvas.height);
+
+    function erase(x, y, radius) {
+        ctx.globalCompositeOperation = "destination-out";
+        ctx.beginPath();
+        ctx.arc(x, y, radius, 0, Math.PI * 2);
+        ctx.fill();
+    }
+
+    function smoothAutoErase() {
+        let stepSize = 20; // Distance between each erase step
+        let radius = 25; // Eraser size
+        let x = 0, y = 0;
+        let minX = 0, minY = 0;
+        let maxX = canvas.width, maxY = canvas.height;
+        let direction = "right"; // Start moving right
+
+        function step() {
+            erase(x, y, radius);
+
+            // Move in an expanding square pattern
+            if (direction === "right") {
+                x += stepSize;
+                if (x >= maxX) { x = maxX; direction = "down"; minY += stepSize; }
+            } else if (direction === "down") {
+                y += stepSize;
+                if (y >= maxY) { y = maxY; direction = "left"; maxX -= stepSize; }
+            } else if (direction === "left") {
+                x -= stepSize;
+                if (x <= minX) { x = minX; direction = "up"; maxY -= stepSize; }
+            } else if (direction === "up") {
+                y -= stepSize;
+                if (y <= minY) { y = minY; direction = "right"; minX += stepSize; }
+            }
+
+            if (minX < maxX && minY < maxY) {
+                requestAnimationFrame(step);
+            } else {
+                img.style.visibility = "visible"; // Reveal image at the end
+            }
+        }
+
+        requestAnimationFrame(step);
+    }
+
+    smoothAutoErase();
+});
