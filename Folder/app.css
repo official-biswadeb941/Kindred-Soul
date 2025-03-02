@@ -413,3 +413,10 @@ i {
     overflow: hidden;
 }
 
+.loveimage{
+    height: 300px;
+    margin-top: 200px;
+    position: relative;
+    border-radius: 0 30px 0 30px ; /* Top-right and bottom-left */
+    z-index: 10;
+}

@@ -207,12 +207,12 @@ document.addEventListener("DOMContentLoaded", function () {
         if (charIndex < poemTitle.length) {
             titleContainer.innerHTML += poemTitle[charIndex];
             charIndex++;
-            setTimeout(typeTitle, 100);
+            setTimeout(typeTitle, 15);
         } else {
             titleContainer.innerHTML += "<br><br>"; // Underline after title
             charIndex = 0;
             lineIndex = 0; // Move to poem
-            setTimeout(typePoem, 500);
+            setTimeout(typePoem, 15);
         }
     }
 
@@ -221,12 +221,12 @@ document.addEventListener("DOMContentLoaded", function () {
             if (charIndex < poemLines[lineIndex].length) {
                 poemContainer.innerHTML += poemLines[lineIndex][charIndex];
                 charIndex++;
-                setTimeout(typePoem, 100);
+                setTimeout(typePoem, 15);
             } else {
                 poemContainer.innerHTML += "<br>";
                 charIndex = 0;
                 lineIndex++;
-                setTimeout(typePoem, 500);
+                setTimeout(typePoem, 15);
             }
         }
     }
@@ -235,7 +235,7 @@ document.addEventListener("DOMContentLoaded", function () {
         if (!isTyping && this.classList.contains("flipped")) {
             isTyping = true;
             poemContainer.style.display = "block";
-            setTimeout(typeTitle, 500);
+            setTimeout(typeTitle, 15);
         }
     });
 });
@@ -277,7 +277,7 @@ function startHeartRainfall() {
 
         // Add glitter effect every few seconds
         addGlitterEffect(b1);
-    }, 300);  // Adjust how often the hearts fall
+    }, 50);  // Adjust how often the hearts fall
 }
 
 // Function to create glitter effect around hearts
